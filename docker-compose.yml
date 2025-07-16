@@ -1,6 +1,7 @@
 version: '3.8'
-
 services:
+ 
+
     nginx:
         image: nginx:1.21.1
         ports:
@@ -36,7 +37,15 @@ services:
             - PMA_HOST=mysql
             - PMA_USER=laravel_user
             - PMA_PASSWORD=laravel_pass
+
         depends_on:
             - mysql
         ports:
             - 8080:80
+
+ 
+    mailhog:
+         image: mailhog/mailhog:latest
+         ports:
+             - "8025:8025"
+             - "1025:1025"

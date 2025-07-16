@@ -46,11 +46,15 @@
     width: 12%;
     margin-left: 8%;
     font-size: 18px;
+    color:#000;
+    text-decoration:none;
 }
 .mypage-form_mode_purchased_item_button {
     width: 15%;
     margin-left: 2%;
     font-size: 18px;
+    color:#000;
+    text-decoration:none;
 }
 .mypage-form_image_box {
     width: 100%;
@@ -63,6 +67,7 @@
     flex-direction: column;
     width: 20%;
     margin: 1vh 2%;
+    text-decoration:none;
 }
 .mypage-form_image_attribute {
     width: 100%;

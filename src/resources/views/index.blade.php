@@ -7,42 +7,30 @@
 @section('content')
 
 <body>
+
+    @auth
     <div class="index-form_mode_change_button_box">
-        <a class="index-form_mode_recommend_button">おすすめ</a>
-        <a class="index-form_mode_mypage_button">マイリスト</a>
+        <a class="index-form_mode_recommend_button" href="/">おすすめ</a>
+        @if(isset($keyword))
+        <a class="index-form_mode_mypage_button" href="/?tab=mylist&&keyword={{ $keyword }}">マイリスト</a>
+        @else
+        <a class="index-form_mode_mypage_button" href="/?tab=mylist">マイリスト</a>
+        @endif
     </div>
+    @endauth
     <div class="index-form_image_box">
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
-        <div class="index-form_image_wrapper">
-            <img class="index-form_image_attribute" src="{{asset('storage/Armani+Mens+Clock.jpg')}}">
-            <div>商品名</div>
-        </div>
+        @if(isset($items))
+        @foreach($items as $item)
+        <a class="index-form_image_wrapper" href="/item/{{ $item['id'] }}">
+            <img class="index-form_image_attribute" src="{{asset('storage/'. $item['item_image']) }}">
+            <div style="display:flex;justify-content:space-between;">
+                <span>{{ $item['item_name'] }}</span>
+                <span style="color:red;font-size:20px;">{{ $item['status'] }}</span>
+            </div>
+        </a>
+        @endforeach
+        @endif
     </div>
-
-
 </body>
 
 @endsection

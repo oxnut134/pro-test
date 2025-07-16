@@ -10,11 +10,15 @@
     width: 12%;
     margin-left: 8%;
     font-size: 20px;
+    text-decoration:none;
+    color:#000;
 }
 .index-form_mode_mypage_button {
     width: 15%;
-    margin-left: 2%;
+    margin-left: 0%;
     font-size: 20px;
+    text-decoration:none;
+    color:#000;
 }
 .index-form_image_box {
     width: 100%;
@@ -27,7 +31,10 @@
     flex-direction: column;
     width: 22%;
     margin: 1%;
+    text-decoration:none;
+    color:black;
 }
 .index-form_image_attribute {
     width: 100%;
+
 }

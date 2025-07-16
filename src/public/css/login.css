@@ -25,7 +25,7 @@
     justify-content: center;
     align-items: flex-end;
     margin-bottom: 7vh;
-    font-size:30px;
+    font-size: 30px;
 }
 .login-form_input_title {
     width: 100%;
@@ -38,6 +38,7 @@
     justify-content: flex-start;
     margin-bottom: 1vh;
 }
+
 .login-form_input_box {
     width: 100%;
     display: flex;
@@ -78,5 +79,8 @@
     display: flex;
     justify-content: center;
     margin-top: 5vh;
-    color:blue;
+    color: blue;
+    font-size:20px;
+    text-decoration:none;
+    
 }
