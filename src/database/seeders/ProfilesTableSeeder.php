@@ -19,8 +19,10 @@ class ProfilesTableSeeder extends Seeder
             'user_id' => 1,
             'profile_image' => 'person-1.png',
             'post_code' => '111-1111',
-            'address' => '東京都',
-            'building' => '中央ビル',
+            'address' => 'ueno',
+            'building' => 'zoo',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('profiles')->insert($param);
 
@@ -28,8 +30,32 @@ class ProfilesTableSeeder extends Seeder
             'user_id' => 2,
             'profile_image' => 'person-2.png',
             'post_code' => '222-2222',
-            'address' => '神奈川県',
-            'building' => '横浜ビル',
+            'address' => 'ueno',
+            'building' => 'zoo',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+        DB::table('profiles')->insert($param);
+
+        $param = [
+            'user_id' => 3,
+            'profile_image' => 'person-3.png',
+            'post_code' => '333-3333',
+            'address' => 'ueno',
+            'building' => 'zoo',
+            'created_at' => now(),
+            'updated_at' => now(),
+        ];
+        DB::table('profiles')->insert($param);
+
+        $param = [
+            'user_id' => 4,
+            'profile_image' => 'person-4.png',
+            'post_code' => '444-4444',
+            'address' => 'ueno',
+            'building' => 'zoo',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('profiles')->insert($param);
 
