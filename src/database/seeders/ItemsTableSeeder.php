@@ -44,7 +44,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 300,
             'description' => '新鮮な玉ねぎ3束のセット',
-            'condition' => '状態が悪い'
+            'condition' => '状態が悪い',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //4
@@ -55,7 +57,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 4000,
             'description' => 'クラシックなデザインの革靴',
-            'condition' => '状態が悪い'
+            'condition' => '状態が悪い',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //5
@@ -66,7 +70,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 45000,
             'description' => '高性能なノートパソコン',
-            'condition' => '良好'
+            'condition' => '良好',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //6
@@ -77,7 +83,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 8000,
             'description' => '高音質のレコーディング用マイク',
-            'condition' => '目立った傷や汚れなし'
+            'condition' => '目立った傷や汚れなし',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //7
@@ -88,7 +96,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => 'Nine West',
             'price' => 3500,
             'description' => 'おしゃれなショルダーバッグ',
-            'condition' => 'やや傷や汚れあり'
+            'condition' => 'やや傷や汚れあり',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //8
@@ -99,7 +109,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 500,
             'description' => '使いやすいタンブラー',
-            'condition' => '状態が悪い'
+            'condition' => '状態が悪い',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //9
@@ -110,7 +122,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 4000,
             'description' => '手動のコーヒーミル',
-            'condition' => '良好'
+            'condition' => '良好',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //10
@@ -121,7 +135,9 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => null,
             'price' => 2500,
             'description' => '便利なメイクアップセット',
-            'condition' => '目立った傷や汚れなし'
+            'condition' => '目立った傷や汚れなし',
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
     }
