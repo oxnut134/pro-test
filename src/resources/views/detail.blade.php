@@ -7,7 +7,7 @@
 @section('content')
 <!--<head><meta name="csrf-token" content="{{ csrf_token() }}"></head>-->
 
-<body>
+<body>{{ $my_like }}
     <div class="detail-form">
         <div class="detail-form_Item_image">
             <img class="detail-form_image_attribute" src="{{asset( 'storage/'.$item->item_image)}}">
@@ -29,6 +29,95 @@
                         <div id="count" class="detail-form_engagement_count">{{ $likes }}</div>
                     </div>
                 </a>
+                <!--------- script ------------------>
+                <style>
+                    .like-icon {
+                        font-size: 24px;
+                        cursor: pointer;
+                        width: 70%;
+                    }
+
+                    .liked {
+                        /* いいねしたときのスタイル（必要に応じて追加） */
+                    }
+
+                    .not-liked {
+                        /* いいねしていないときのスタイル（必要に応じて追加） */
+                    }
+                </style>
+
+                <!-------- ajax による 非同期通信 速度向上版--------->
+                <div id="like-data" data-my-like="{{ $my_like }}"></div>
+                <script>
+                    $(document).ready(function() {
+                        let csrfToken;
+
+                        // ページ読み込み時に一度だけトークンを取得
+                        $.get('/sanctum/csrf-cookie').done(function() {
+                            csrfToken = $('meta[name="csrf-token"]').attr('content');
+                            $.ajaxSetup({
+                                headers: {
+                                    'X-CSRF-TOKEN': csrfToken
+                                }
+                            });
+                        });
+
+                        // HTMLから直接データを取得
+                        var itemId = $('.detail-form_engagement_image_wrapper').data('product-id'); // data-product-idから取得
+                        //現在の$my_likeカウント0 or 1を取得
+                        var myLike = parseInt($('#like-data').data('my-like'), 10);
+                        //console.log("myLike:", myLike); // デバッグ用
+
+                        var initialCount = parseInt($('#count').text()); // 初期カウントをJavaScriptで取得
+
+                        // 初期状態の設定
+                        if (initialCount > 0) {
+                            $('.like-icon').addClass('liked').attr('src', "{{ asset('storage/liked.png') }}"); // 初期状態を設定
+                        } else {
+                            $('.like-icon').addClass('not-liked').attr('src', "{{ asset('storage/not-liked.png') }}"); // 初期状態を設定
+                        }
+
+                        $('.detail-form_engagement_image_wrapper').on('click', function(e) {
+                            e.preventDefault(); // デフォルトのリンク動作を防ぐ
+                            let likeIcon = $(this).find('.like-icon');
+                            let countElement = $('#count');
+                            let currentCount = parseInt(countElement.text()); // 現在のカウントを取得
+
+                            // アクションを決定
+
+                            console.log("現在の myLike の値:", myLike);
+                            let action = myLike === 1 ? 'remove' : 'add';
+
+                            $.ajax({
+                                url: `http://localhost/like/${itemId}/${action}`, // コントローラ起動
+                                method: 'GET',
+                                success: function(data) {
+                                    if (action === 'remove') {
+                                        likeIcon.removeClass('liked').addClass('not-liked');
+                                        currentCount -= 1; // カウントを減算
+                                        myLike = 0; // ユーザーのいいね状態を更新
+                                    } else {
+                                        likeIcon.removeClass('not-liked').addClass('liked');
+                                        currentCount += 1; // カウントを加算
+                                        myLike = 1; // ユーザーのいいね状態を更新
+                                    }
+
+                                    // 画像を更新
+                                    if (currentCount <= 0) {
+                                        likeIcon.attr('src', "{{ asset('storage/not-liked.png') }}"); // いいね数が0のとき
+                                    } else {
+                                        likeIcon.attr('src', "{{ asset('storage/liked.png') }}"); // いいね数が1以上のとき
+                                    }
+
+                                    countElement.text(currentCount); // 現在のカウントを表示
+                                },
+                                error: function() {
+                                    console.log(`いいね${action}に失敗しました`);
+                                }
+                            });
+                        });
+                    });
+                </script>
                 <!-------　コメント　------------------>
                 <div class="detail-form_engagement_image_wrapper">
                     <img class="detail-form_engagement_image" src="{{asset('storage/comment.png')}}">
@@ -80,88 +169,5 @@
             @endauth
         </div>
     </div>
-    <!--------- script ------------------>
-    <style>
-        .like-icon {
-            font-size: 24px;
-            cursor: pointer;
-            width: 70%;
-        }
-
-        .liked {
-            /* いいねしたときのスタイル（必要に応じて追加） */
-        }
-
-        .not-liked {
-            /* いいねしていないときのスタイル（必要に応じて追加） */
-        }
-    </style>
-
-    <!-------- ajax による 非同期通信 速度向上版--------->
-    <script>
-        $(document).ready(function() {
-            let csrfToken;
-
-            // ページ読み込み時に一度だけトークンを取得
-            $.get('/sanctum/csrf-cookie').done(function() {
-                csrfToken = $('meta[name="csrf-token"]').attr('content');
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': csrfToken
-                    }
-                });
-            });
-
-            // HTMLから直接データを取得
-            var itemId = $('.detail-form_engagement_image_wrapper').data('product-id'); // data-product-idから取得
-            var myLike = $('.like-icon').attr('src') === "{{ asset('storage/liked.png') }}" ? 1 : 0; // 初期状態の画像からいいね状態を判定
-            var initialCount = parseInt($('#count').text()); // 初期カウントをJavaScriptで取得
-
-            // 初期状態の設定
-            if (initialCount > 0) {
-                $('.like-icon').addClass('liked').attr('src', "{{ asset('storage/liked.png') }}"); // 初期状態を設定
-            } else {
-                $('.like-icon').addClass('not-liked').attr('src', "{{ asset('storage/not-liked.png') }}"); // 初期状態を設定
-            }
-
-            $('.detail-form_engagement_image_wrapper').on('click', function(e) {
-                e.preventDefault(); // デフォルトのリンク動作を防ぐ
-                let likeIcon = $(this).find('.like-icon');
-                let countElement = $('#count');
-                let currentCount = parseInt(countElement.text()); // 現在のカウントを取得
-
-                // アクションを決定
-                let action = myLike === 1 ? 'remove' : 'add';
-
-                $.ajax({
-                    url: `http://localhost/like/${itemId}/${action}`, // コントローラ起動
-                    method: 'GET',
-                    success: function(data) {
-                        if (action === 'remove') {
-                            likeIcon.removeClass('liked').addClass('not-liked');
-                            currentCount -= 1; // カウントを減算
-                            myLike = 0; // ユーザーのいいね状態を更新
-                        } else {
-                            likeIcon.removeClass('not-liked').addClass('liked');
-                            currentCount += 1; // カウントを加算
-                            myLike = 1; // ユーザーのいいね状態を更新
-                        }
-
-                        // 画像を更新
-                        if (currentCount <= 0) {
-                            likeIcon.attr('src', "{{ asset('storage/not-liked.png') }}"); // いいね数が0のとき
-                        } else {
-                            likeIcon.attr('src', "{{ asset('storage/liked.png') }}"); // いいね数が1以上のとき
-                        }
-
-                        countElement.text(currentCount); // 現在のカウントを表示
-                    },
-                    error: function() {
-                        console.log(`いいね${action}に失敗しました`);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 @endsection

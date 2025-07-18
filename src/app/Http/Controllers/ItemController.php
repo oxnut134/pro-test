@@ -42,14 +42,17 @@ class ItemController extends Controller
         if ($tab === 'mylist') {
             $keyword = $request->keyword;
             //dd($keyword);
+            //検索状態保持
             $items = Item::where('item_name', 'like', '%' . $keyword . '%')
-                //->whereHas('likes')
                 ->whereHas('likeToUser', function ($query) {
                     $query->where('user_id', Auth::id());
                 }) // 認証されたユーザーのIDでフィルタリング
+                //->whereHas('likes')
+                //->whereHas('likeToUser', function ($query) {
+                //  $query->where('user_id', Auth::id());
+                //}) // 認証されたユーザーのIDでフィルタリング
                 ->where('user_id', '!=', Auth::id()) //本番はこちらを追記/自分の出品でない
                 ->get();
-            //dd($items);
 
             return view('index', ['items' => $items]);
         } else {
@@ -120,6 +123,7 @@ class ItemController extends Controller
         $user_id = Auth::id();
         $my_like = Like::where('user_id', $user_id)
             ->where('item_id', $id)->count();
+        //dd($my_like);
         //コメント数取得
 
         $comment_count = Comment::where('item_id', $id)->count();

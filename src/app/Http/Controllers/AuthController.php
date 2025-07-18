@@ -78,7 +78,7 @@ class AuthController extends Controller
             return view('index', ['items' => $items]);
         }
     }
-    /* Not needed because fortify should do this function
+    /* Not needed because fortify  do this function by itself
     public function addUser(Request $request)
     {
         $user = new User;
@@ -109,34 +109,6 @@ class AuthController extends Controller
             ]
         );
     }
-    /*public function upProfileFirst(ProfileRequest $request)
-    {
-        $profile = new Profile;
-        $profile->user_id = Auth::id(); //1は本番ではAuth::id()となる
-        $profile->profile_image = $request->profile_image;
-        $profile->post_code = $request->post_code;
-        $profile->address = $request->address;
-        $profile->building = $request->building;
-
-        $profile->save();
-
-        return redirect('/');
-    }*/
-
-    /* Not needed because fortify should do this function
-    public function addMember(Request $request)
-    {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-        $user->password_confirmation = $request->password_confirmation;
-        $user->save();
-
-        return redirect('/');
-        //return redirect()->route('send-mail')->with('email', $user->email);
-        //return view('register');
-    }*/
     public function addProfile(ProfileFirstRequest $request)
     {
         $profile = new Profile;

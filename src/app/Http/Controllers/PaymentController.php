@@ -9,7 +9,6 @@ use Stripe\Charge;
 use App\Models\Purchase;
 use App\Models\Item;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use App\Http\Requests\PurchaseRequest;
 use Illuminate\Support\Facades\Log;
 
@@ -32,12 +31,7 @@ class PaymentController extends Controller
         }
     }
 
-    //This function, named 'store,' was originally created for the payment route of the Stripe
-    //test page. Eventually, it was unified into the 'directPay' function. On the other hand,
-    //this routine may include some production code for Stripe payments. Therefore, it is
-    //recommended to keep it as a reference.
 
-    /*  */
     public function store(Request $request)
     {
         //dd($request);
@@ -84,11 +78,6 @@ class PaymentController extends Controller
                     'redirect_url' => '/error'
                 ]);
             }
-            // フロントエンドに渡す必要があるclient_secretを取得
-            //return redirect(route('payment.index', [
-            //    'client_secret' => $paymentIntent->client_secret,
-            //    'message' => '決済を進めてください。',
-            //]));
         } catch (\Exception $e) {
             // エラー処理
             Log::error($e->getMessage());
@@ -96,9 +85,6 @@ class PaymentController extends Controller
                 'message' => '決済に失敗しました...',
                 'redirect_url' => '/error'
             ]);
-            //return redirect(route('payment.index', [
-            //    'message' => '決済に失敗しました...',
-            //]));
         }
     }
 
@@ -135,7 +121,7 @@ class PaymentController extends Controller
 
             //messages that this item is sold out .
             return view('temporary_message', [
-                'message' => '申し訳ありません、この商品は売り切れです。',
+                'message' => '申し訳ありません、この商品は販売済みです。',
                 'redirect_url' => '/error'
             ]);
         }
