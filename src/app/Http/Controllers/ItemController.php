@@ -35,7 +35,6 @@ class ItemController extends Controller
             return redirect('/profile/first');
         }
 
-
         $tab = $request->query('tab');
         $keyword = $request->query('keyword');
         //dd(Auth::id());
@@ -54,7 +53,10 @@ class ItemController extends Controller
                 ->where('user_id', '!=', Auth::id()) //本番はこちらを追記/自分の出品でない
                 ->get();
 
-            return view('index', ['items' => $items]);
+            return view('index', [
+                'items' => $items,
+                'keyword' => $keyword,
+            ]);
         } else {
             $items = Item::all(); //全てのアイテムを取得
             //$items = Item::where('user_id', '!=', Auth::id())->get(); //自分の出品は表示なし
