@@ -207,6 +207,24 @@ composer require laravel/cashier
 
 ---
 
+### テストコード
+
+**①会員登録機能　　　　RegisterValidationTest.php
+②ログイン機能　　　　LoginValidationTest.php**
+③**ログアウト機能　　　LogoutValidationTest.php
+④商品一覧取得　　　　IndexFunctionTest.php
+⑤マイリスト一覧取得　MylistFunctionTest.php
+⑥商品検索機能　　　　SearchItemsTest.php
+⑦商品詳細情報取得　　ShowItemDetailTest.php
+⑧いいね機能　　　　　LikeFunctionTest.php
+⑨コメント送信機能　　CommentFunctionTest.php
+⑩商品購入機能　　　　PurchaseFunctionTest.php
+⑪支払い方法選択機能　PaymentMethodDisplayedTest.php
+⑫配送先変更機能　　　RedirectDeliveryAddressTest.php
+⑬ユーザー情報取得　　MyPageFunctionTest.php
+⑭ユーザー情報変更　　MyProfileDisplayedTest.php
+⑮出品商品情報登録　　RegisterForExhibitionTest.php**
+
 # 2）利用技術
 
 - **Docker**: 27.5.1
