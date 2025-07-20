@@ -1,24 +1,14 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ProductController;
-use App\Models\Product;
-use App\Http\Controllers\TestController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\PostsController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MailController;
-use App\Http\Controllers\MailReceiveController;
-use App\Http\Controllers\CheckoutController;
-
-use App\Mail\TestMail;
-use Illuminate\Support\Facades\Mail;
-use Laravel\Fortify\Facades\Fortify;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -84,8 +74,15 @@ Route::middleware('auth')->group(function () {
     Route::post('/send-reply-mail', [MailController::class, 'sendReply'])->name('send-reply-mail');
     //for the button requiring to resend a confirmation mail
     Route::get('/email', [MailController::class, 'showEmail']);
+
+    //stripe 新API対応
+    Route::post('/checkout', [PaymentController::class, 'checkout'])->name('checkout');
+    Route::get('/checkout/success', [PaymentController::class, 'store'])->name('checkout.success');
+    Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
 });
 
+
+//以下viewテスト用
 //Route::get('/update', [TestController::class, 'update']);
 //Route::get('/register', [TestController::class, 'register']);
 //Route::get('header', [TestController::class, 'header']);
@@ -95,4 +92,3 @@ Route::middleware('auth')->group(function () {
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-

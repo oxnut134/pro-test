@@ -69,7 +69,7 @@
                 <!------- payment_method はセット済------->
                     <input type="hidden" name="delivery_address" value="{{ $post_code.$address.$building}}">
                     <input type="hidden" name="price" value="{{ $item['price'] }}">
-                    <input type="hidden" name="price" value="{{ $item['price'] }}">
+                    <input type="hidden" name="item_name" value="{{ $item['item_name'] }}">
                     <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                     <input type="hidden" name="email" value="{{ $email }}">
                     <button class="purchase-form_purchase_button">
