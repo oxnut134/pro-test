@@ -33,7 +33,7 @@ docker-compose up -d --build
 ### PHPコンテナログイン
 
 ```bash
-コピー
+
 docker-compose exec php bash
 
 ```
@@ -41,7 +41,7 @@ docker-compose exec php bash
 ### Composerインストール確認
 
 ```
-コピー
+
 composer -v
 
 ```
@@ -49,12 +49,14 @@ composer -v
 ### Laravelインストール
 
 ```lua
-コピー
+
 composer create-project "laravel/laravel=8.*" . --prefer-dist
 
 ```
 
 ### 日本時間に変更
+
+`config/app.php　　'timezone' => 'Asia/Tokyo'`
 
 ### Laravel起動確認
 
@@ -62,11 +64,9 @@ composer create-project "laravel/laravel=8.*" . --prefer-dist
 
 ### エラー発生時の対応
 
-```bash
-コピー
+```jsx
 chmod -R 775 storage
 chown -R www-data storage
-
 ```
 
 ---
@@ -252,3 +252,36 @@ composer require laravel/cashier
 - **Mailhog**: [https://github.com/mailhog/MailHog](https://github.com/mailhog/MailHog)
 - **Stripe公式サイト**: [https://stripe.com/jp](https://stripe.com/jp)
 - **Stripe Checkout作成例**: [https://zakkuri.life/laravel-stripe-charge/](https://zakkuri.life/laravel-stripe-charge/)※APIが以前のもので3DS未対応のため、新しいAPIにする必要あり。
+
+# 5）追記事項
+
+## 認証メール　確認操作
+
+今回のメール認証は会員登録後、mailhogでユーザーにメールが送信され、そのメールの
+
+「メールアドレス確認」ボタンをクリックすることでusersテーブルのemail_verified_atカラムに
+日時が保存されて完了します。以下操作手順を記述します。
+
+①会員登録画面　「登録する」ボタンクリック
+
+②認証メール送付案内表示
+
+　　ここで送信側はユーザーの確認操作待ちとなります。
+
+![image.png](image%201.png)
+
+③mailhog画面立ち上げ（事前立ち上げでもOKです。）
+
+　http://localhost:8025
+
+![image.png](image%202.png)
+
+④対応するメール行クリックでメール内容表示
+
+![image.png](image%203.png)
+
+⑤「メールアドレス確認」ボタンクリックで認証完了です。
+
+認証後は商品一覧画面へ遷移します。
+
+※今回の流れでは、送信されたメールの確認ボタンをクリックしないと、usersテーブルのカラム（email_verified_at)にデータが保存されずに未認証のままとなり、一方ではメールアドレスは登録されていますので、再度の登録はできなくなり、そのメールアドレスは使用できなくなります。現状では、未認証ユーザーのレコードは直接テーブルを操作し手動で削除しています。
