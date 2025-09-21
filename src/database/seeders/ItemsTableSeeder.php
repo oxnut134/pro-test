@@ -51,7 +51,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //4
         $param = [
-            'user_id' => 2,
+            'user_id' => 1,
             'item_image' => 'Item-Leather+Shoes+Product+Photo.jpg',
             'item_name' => '革靴',
             'brand_name' => null,
@@ -64,7 +64,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //5
         $param = [
-            'user_id' => 2,
+            'user_id' => 1,
             'item_image' => 'Item-Living+Room+Laptop.jpg',
             'item_name' => 'ノートPC',
             'brand_name' => null,
@@ -77,7 +77,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //6
         $param = [
-            'user_id' => 3,
+            'user_id' => 2,
             'item_image' => 'Item-Music+Mic+4632231.jpg',
             'item_name' => 'マイク',
             'brand_name' => null,
@@ -90,7 +90,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //7
         $param = [
-            'user_id' => 3,
+            'user_id' => 2,
             'item_image' => 'Item-Purse+fashion+pocket.jpg',
             'item_name' => 'ショルダーバッグ',
             'brand_name' => 'Nine West',
@@ -103,7 +103,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //8
         $param = [
-            'user_id' => 3,
+            'user_id' => 2,
             'item_image' => 'Item-Tumbler+souvenir.jpg',
             'item_name' => 'タンブラー',
             'brand_name' => null,
@@ -116,7 +116,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //9
         $param = [
-            'user_id' => 3,
+            'user_id' => 2,
             'item_image' => 'Item-Waitress+with+Coffee+Grinder.jpg',
             'item_name' => 'コーヒーミル',
             'brand_name' => null,
@@ -129,7 +129,7 @@ class ItemsTableSeeder extends Seeder
         DB::table('items')->insert($param);
 //10
         $param = [
-            'user_id' => 4,
+            'user_id' => 2,
             'item_image' => 'Item-外出メイクアップセット.jpg',
             'item_name' => 'メイクセット',
             'brand_name' => null,

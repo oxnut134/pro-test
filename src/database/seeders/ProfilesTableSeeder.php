@@ -17,7 +17,7 @@ class ProfilesTableSeeder extends Seeder
     {
         $param = [
             'user_id' => 1,
-            'profile_image' => 'person-1.png',
+            'profile_image' => 'user-cat.png',
             'post_code' => '111-1111',
             'address' => 'ueno',
             'building' => 'zoo',
@@ -28,7 +28,7 @@ class ProfilesTableSeeder extends Seeder
 
         $param = [
             'user_id' => 2,
-            'profile_image' => 'person-2.png',
+            'profile_image' => 'user-dog.png',
             'post_code' => '222-2222',
             'address' => 'ueno',
             'building' => 'zoo',
@@ -39,7 +39,7 @@ class ProfilesTableSeeder extends Seeder
 
         $param = [
             'user_id' => 3,
-            'profile_image' => 'person-3.png',
+            'profile_image' => 'user-tiger.png',
             'post_code' => '333-3333',
             'address' => 'ueno',
             'building' => 'zoo',
@@ -48,7 +48,7 @@ class ProfilesTableSeeder extends Seeder
         ];
         DB::table('profiles')->insert($param);
 
-        $param = [
+        /*$param = [
             'user_id' => 4,
             'profile_image' => 'person-4.png',
             'post_code' => '444-4444',
@@ -57,7 +57,7 @@ class ProfilesTableSeeder extends Seeder
             'created_at' => now(),
             'updated_at' => now(),
         ];
-        DB::table('profiles')->insert($param);
+        DB::table('profiles')->insert($param);*/
 
 
     }
