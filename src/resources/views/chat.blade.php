@@ -60,11 +60,6 @@
             <div style="width:40%;height:40px;margin-top:0.5vh;margin-left:2%;border:none;background-color:#eee;font-size:12px;">{{ $message['message']}}</div>
         </div>
         @else
-        <?php
-        //$user['name'] = "Cat"; //本番はAuto::idの名前となる
-        //$profile['profile_image'] = "user-cat.png"
-        ?>
-        <!---->
         <div style="height:20vh;display:flex;flex-direction:column;align-items:flex-end;">
             <div style="width:70%;display:flex;justify-content:flex-end;align-items:center;">
                 @if(isset($my_name[0]))
@@ -86,32 +81,12 @@
                 <button type="button" class="edit-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;margin-right:2%;border:none;background-color:#fff;font-size:10px;">編集</button>
                 <button type="button" class="delete-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;border:none;background-color:#fff;font-size:10px;">消去</button>
             </div>
-            
-            <!--            <div class="message-container" style="width:40%;height:40px;margin-top:0.5vh;margin-right:2%;border:none;background-color:#eee;font-size:12px;">
-                <span class="message-text">{{ $message['message'] }}</span>
-                <input type="text" class="edit-input" style="display:none;width:100%;height:100%;font-size:12px;" value="{{ $message['message'] }}">
-            </div>
-            <div class="message-container" style="width:10%;margin-right:2%;display:flex;justify-content:flex-end;">
-                <button class="edit-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;margin-right:2%;border:none;background-color:#fff;font-size:10px;">編集</button>
-                <button class="delete-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;border:none;background-color:#fff;font-size:10px;">消去</button>
-            </div>-->
-
-            <!--           <div style="width:40%;height:40px;margin-top:0.5vh;margin-right:2%;border:none;background-color:#eee;font-size:12px;">{{ $message['message']}}</div>
-            <div style="width:10%;margin-right:2%;display:flex;justify-content:flex-end;">
-                <button style="width:40%;height:15px;margin-top:1vh;margin-right:2%;border:none;background-color:#fff;font-size:10px;
-               ">編集</button>
-                <button style="width:40%;height:15px;margin-top:1vh;border:none;background-color:#fff;font-size:10px;">消去</button>
-            </div>-->
         </div>
 
         @endif
         @endif
         @endforeach
         @endforeach
-        <!----->
-        <!--        <div style="height:15vh;">
-            ---- Dummy -----
-        </div>-->
         <form type="submit" action="/post" method="post">
             @csrf
             <div style="width:100%;height:10vh;display:flex;justify-content:center;align-items:flex-end;padding-right:0;">
@@ -127,22 +102,11 @@
                 @endforeach
                 @endforeach
 
-                <!--                @foreach($chat_messages as $chat_message)
-                @foreach($chat_message['messages'] as $index => $message)
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][id]" value="{{ $message->id }}">
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][position]" value="{{ $message->position }}">
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][message]" value="{{ $message->message }}">
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][image]" value="{{ $message->image }}">
-                @endforeach
-                @endforeach-->
-
                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                 @if(isset($chat_id[0]))
                 <input type="hidden" name="chat_id" value="{{ $chat_id[0] }}">
                 @endif
                 <button style="width:10%;height:4vh;border:1px solid #000;border-radius:5px;margin-left:3%;">投稿</button>
-                <!--<input type="file" style="width:10%;height:30px;margin-top:0.5vh;margin-left:2%;background-color:#eee;font-size:12px;border:1px solid red;border-radius:5px;background-color:#fff;color:red;">-->
-                <!--<input type="file" style="width:10%;font-size:100%;border-radius: 5px;">-->
             </div>
         </form>
     </div>
