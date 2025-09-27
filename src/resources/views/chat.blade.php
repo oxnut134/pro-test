@@ -44,69 +44,72 @@
             priceElement.innerText = price.toLocaleString() + '円';
         </script>
         <!---->
-        @foreach($chat_messages as $chat_message)
-        @foreach($chat_message['messages'] as $index => $message) <!-- インデックスを取得 -->
-        @if(isset($message['message']))
-        @if($message['position'] != $auth_position )
-        <div style="height:15vh;">
-            <div style="width:70%;">
-                @if(isset($partner_profile[0]['profile_image']))
-                <img style="width:5%;height:auto;border-radius: 50%;margin-left: 2%;margin-top: 0.5vh;" src="{{asset('storage/'.$partner_profile[0]['profile_image'])}}" alt="画像がここに表示されます。">
-                @endif
-                @if(isset($partner_name[0]))
-                <span style="font-size:15px;margin-left:4%;">{{ $partner_name[0] }}</span>
-                @endif
-            </div>
-            <div style="width:40%;height:40px;margin-top:0.5vh;margin-left:2%;border:none;background-color:#eee;font-size:12px;">{{ $message['message']}}</div>
-        </div>
-        @else
-        <div style="height:20vh;display:flex;flex-direction:column;align-items:flex-end;">
-            <div style="width:70%;display:flex;justify-content:flex-end;align-items:center;">
-                @if(isset($my_name[0]))
-                <span style="font-size:15px;margin-right:4%;">{{ $my_name[0] }}</span>
-                @endif
-                @if(isset($my_profile[0]['profile_image']))
-                <img style="width:5%;height:auto;border-radius: 50%;margin-right: 2%;margin-top: 0.5vh;" src="{{asset('storage/'.$my_profile[0]['profile_image'])}}" alt="画像がここに表示されます。">
-                @endif
-            </div>
-
-
-
-            <div class="message-container" style="width:40%;height:40px;margin-top:0.5vh;margin-right:2%;border:none;background-color:#eee;font-size:12px;">
-                <span class="message-text">{{ $message['message'] }}</span>
-                <input type="text" class="edit-input" style="display:none;width:100%;height:100%;font-size:12px;" value="{{ $message['message'] }}"
-                    name="message[{{ $chat_message['chat']->id }}][{{ $index }}][message]">
-            </div>
-            <div class="message-container" style="width:10%;margin-right:2%;display:flex;justify-content:flex-end;">
-                <button type="button" class="edit-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;margin-right:2%;border:none;background-color:#fff;font-size:10px;">編集</button>
-                <button type="button" class="delete-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;border:none;background-color:#fff;font-size:10px;">消去</button>
-            </div>
-        </div>
-
-        @endif
-        @endif
-        @endforeach
-        @endforeach
-        <form type="submit" action="/post" method="post">
+        <form style="display:flex;flex-direction:column;justify-content:flex-start;" type="submit" action="/post" method="post">
             @csrf
-            <div style="width:100%;height:10vh;display:flex;justify-content:center;align-items:flex-end;padding-right:0;">
-                <input type="text" name="message_text" value="取引メッセージを入力してください" style="width:80%;height:30px;margin-top:0.5vh;margin-left:-5%;background-color:#eee;font-size:12px;border:1px solid #000;border-radius:5px;background-color:#fff;">
+            @foreach($chat_messages as $chat_message)
+            @foreach($chat_message['messages'] as $index => $message) <!-- インデックスを取得 -->
+            @if(isset($message['message']))
+            @if($message['position'] != $auth_position )
+            <div style="height:15vh;">
+                <div style="width:70%;">
+                    @if(isset($partner_profile[0]['profile_image']))
+                    <img style="width:5%;height:auto;border-radius: 50%;margin-left: 2%;margin-top: 0.5vh;" src="{{asset('storage/'.$partner_profile[0]['profile_image'])}}" alt="画像がここに表示されます。">
+                    @endif
+                    @if(isset($partner_name[0]))
+                    <span style="font-size:15px;margin-left:4%;">{{ $partner_name[0] }}</span>
+                    @endif
+                </div>
+                <div style="width:40%;height:40px;margin-top:0.5vh;margin-left:2%;border:none;background-color:#eee;font-size:12px;">{{ $message['message']}}</div>
+            </div>
+            @else
+            <div style="height:20vh;display:flex;flex-direction:column;align-items:flex-end;">
+                <div style="width:70%;display:flex;justify-content:flex-end;align-items:center;">
+                    @if(isset($my_name[0]))
+                    <span style="font-size:15px;margin-right:4%;">{{ $my_name[0] }}</span>
+                    @endif
+                    @if(isset($my_profile[0]['profile_image']))
+                    <img style="width:5%;height:auto;border-radius: 50%;margin-right: 2%;margin-top: 0.5vh;" src="{{asset('storage/'.$my_profile[0]['profile_image'])}}" alt="画像がここに表示されます。">
+                    @endif
+                </div>
 
-                @foreach($chat_messages as $chat_message)
-                @foreach($chat_message['messages'] as $index => $message) <!-- インデックスを取得 -->
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][id]" value="{{ $message['id'] }}">
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][position]" value="{{ $message['position'] }}">
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][image]" value="{{ $message['image'] }}"> <!-- 画像情報 -->
-                <input type="hidden" name="message[{{ $chat_message['chat']->id }}][{{ $index }}][message]" value="{{ $message['message'] }}"> <!-- メッセージ情報を追加 -->
 
-                @endforeach
-                @endforeach
+
+                <div class="message-container" style="width:40%;height:40px;margin-top:0.5vh;margin-right:2%;border:none;background-color:#eee;font-size:12px;">
+                    <span class="message-text">{{ $message['message'] }}</span>
+                    <input type="text" class="edit-input" style="display:none;width:100%;height:100%;font-size:12px;" value="{{ $message['message'] }}"
+                        name="message[{{ $chat_message['chat']->id }}][{{ $index }}][message]">
+                    <input type="text" class="edit-input" style="display:none;width:100%;height:100%;font-size:12px;" value="{{ $message['id'] }}"
+                        name="message[{{ $chat_message['chat']->id }}][{{ $index }}][id]">
+                </div>
+                <div class="message-container" style="width:10%;margin-right:2%;display:flex;justify-content:flex-end;">
+                    <button type="button" class="edit-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;margin-right:2%;border:none;background-color:#fff;font-size:10px;">編集</button>
+                    <a href="/message/delete/?message_id={{ $message['id'] }}&item_id={{ $item['id'] }}" class="delete-button" data-index="{{ $index }}" style="width:40%;height:15px;margin-top:1vh;border:none;background-color:#fff;font-size:10px;text-decoration:none;color:#000;">消去</a>
+                </div>
+            </div>
+
+            @endif
+            @endif
+            @endforeach
+            @endforeach
+            <!--<form type="submit" action="/post" method="post">
+            @csrf-->
+@if ($errors)
+    <div style="padding-left:0.5%;font-size:10px;color:red;">
+            @foreach ($errors->all() as $error)
+                <span>{{ $error }}</span>
+            @endforeach
+    </div>
+@endif 
+            <div style="width:100%;height:6vh;display:flex;justify-content:center;align-items:flex-end;padding-right:0;">
+
+               <input type="text" name="message_text" value="取引メッセージを入力してください" style="width:80%;height:30px;margin-top:0.5vh;margin-left:-5%;margin-bottom:5px;background-color:#eee;font-size:12px;border:1px solid #000;border-radius:5px;background-color:#fff;">
+
 
                 <input type="hidden" name="item_id" value="{{ $item['id'] }}">
                 @if(isset($chat_id[0]))
                 <input type="hidden" name="chat_id" value="{{ $chat_id[0] }}">
                 @endif
-                <button style="width:10%;height:4vh;border:1px solid #000;border-radius:5px;margin-left:3%;">投稿</button>
+                <button style="width:10%;height:4vh;border:1px solid #000;border-radius:5px;margin-left:3%;margin-bottom:7px;">投稿</button>
             </div>
         </form>
     </div>

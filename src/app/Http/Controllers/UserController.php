@@ -11,6 +11,7 @@ use App\Models\Chat;
 use App\Models\Message;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\ProfileRequest;
+use App\Http\Requests\ChatRequest;
 
 
 class UserController extends Controller
@@ -346,10 +347,17 @@ class UserController extends Controller
         ]);
     }
 
-    public function post(Request $request)
+    public function post(ChatRequest $request)
     {
-
         //-------- DB保存 --------------
+        $messages = $request->input('message.1');
+        //dd($messages);
+        foreach ($messages as $messageData) {
+            Message::where('id', $messageData['id'])->update([
+                'message' => $messageData['message'],
+            ]);
+        }
+
         $itemId = $request->item_id;
         $chatId = $request->chat_id;
         $messageText = $request->message_text;
@@ -453,6 +461,79 @@ class UserController extends Controller
         ]);
     }
 
+    public function messageDelete(Request $request)
+    {
+        $itemId = $request->item_id;
+        $messageId = $request->message_id;
+
+        $message = Message::find($messageId);
+
+        if ($message) {
+            $message->delete();
+        }
+
+        $item = Item::find($itemId);
+        if ($item->user_id == Auth::id()) {
+            $authPosition = "seller";
+        } else {
+            $authPosition = "buyer";
+        }
+        $auth_id = Auth::id();
+        //$chats = Chat::where('item_id', $itemId)->get();
+        $chats = Chat::where('item_id', $itemId)
+            ->where(function ($query) {
+                $query->where('buyer_id', Auth::id())
+                    ->orWhere('seller_id', Auth::id());
+            })->get();
+        //dd($chats);
+        $chatMessages = [];
+        $partnerName = [];
+        $partnerProfiles = [];
+        $myName = [];
+        $myProfiles = [];
+        $chatId = [];
+
+        foreach ($chats as $chat) {
+            $messages = Message::where('chat_id', $chat->id)->get();
+
+            $chatMessages[] = [
+                'chat' => $chat,
+                'messages' => $messages,
+            ];
+            //dd($chat->buyer_id);
+            if ($chat->buyer_id == Auth::id()) {
+                if ($chat->buyer_id) {
+                    $myName[] = User::where('id', $chat->buyer_id)->first()->name;
+                    $myProfiles[] = Profile::where('user_id', $chat->buyer_id)->first();
+                }
+                if ($chat->seller_id) {
+                    $partnerName[] = User::where('id', $chat->seller_id)->first()->name;
+                    $partnerProfiles[] = Profile::where('user_id', $chat->seller_id)->first();
+                }
+            } else {
+                if ($chat->seller_id) {
+                    $myName[] = User::where('id', $chat->seller_id)->first()->name;
+                    $myProfiles[] = Profile::where('user_id', $chat->seller_id)->first();
+                }
+                if ($chat->buyer_id) {
+                    $partnerName[] = User::where('id', $chat->buyer_id)->first()->name;
+                    $partnerProfiles[] = Profile::where('user_id', $chat->buyer_id)->first();
+                }
+            }
+            $chatId[] = $chat->id;
+        }
+
+        return view('chat', [
+            'item' => $item,
+            'auth_position' => $authPosition,
+            'chat_messages' => $chatMessages,
+            'my_name' => $myName,
+            'my_profile' => $myProfiles,
+            'partner_name' => $partnerName,
+            'partner_profile' => $partnerProfiles,
+            'chat_id' => $chatId,
+        ]);
+    }
 
     //-------------------------------------------
 

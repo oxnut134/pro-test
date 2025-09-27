@@ -86,3 +86,4 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/chat/{item_id}', [UserController::class, 'chat'])->name('chat');
 Route::post('/post', [UserController::class, 'post'])->name('post');
+Route::get('/message/delete', [UserController::class, 'messageDelete'])->name('message.delete');
