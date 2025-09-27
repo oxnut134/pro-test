@@ -22,7 +22,10 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => 'Armani',
             'price' => 15000,
             'description' => 'スタイリッシュなデザインのメンズ腕時計',
-            'condition' => '良好'
+            'condition' => '良好',
+            'status' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //2
@@ -33,7 +36,10 @@ class ItemsTableSeeder extends Seeder
             'brand_name' => '',
             'price' => 5000,
             'description' => '高速で信頼性の高いハードディスク',
-            'condition' => '目立った傷や汚れなし'
+            'condition' => '目立った傷や汚れなし',
+            'status' => null,
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
         DB::table('items')->insert($param);
 //3
@@ -45,6 +51,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 300,
             'description' => '新鮮な玉ねぎ3束のセット',
             'condition' => '状態が悪い',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -58,6 +65,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 4000,
             'description' => 'クラシックなデザインの革靴',
             'condition' => '状態が悪い',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -71,6 +79,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 45000,
             'description' => '高性能なノートパソコン',
             'condition' => '良好',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -84,6 +93,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 8000,
             'description' => '高音質のレコーディング用マイク',
             'condition' => '目立った傷や汚れなし',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -97,6 +107,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 3500,
             'description' => 'おしゃれなショルダーバッグ',
             'condition' => 'やや傷や汚れあり',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -110,6 +121,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 500,
             'description' => '使いやすいタンブラー',
             'condition' => '状態が悪い',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -123,6 +135,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 4000,
             'description' => '手動のコーヒーミル',
             'condition' => '良好',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];
@@ -136,6 +149,7 @@ class ItemsTableSeeder extends Seeder
             'price' => 2500,
             'description' => '便利なメイクアップセット',
             'condition' => '目立った傷や汚れなし',
+            'status' => null,
             'created_at' => now(),
             'updated_at' => now(),
         ];

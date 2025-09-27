@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/mypage', [UserController::class, 'mypage'])->name('mypage');
     Route::get('/mypage/purchasedItems', [UserController::class, 'getPurchasedItems']);
     Route::get('/mypage/exhibitedItems', [UserController::class, 'getExhibitedItems']);
+    Route::get('/mypage/transactionItems', [UserController::class, 'getTransactionItems']);
     Route::get('/mypage/profile', [UserController::class, 'showProfile']);
     Route::post('/mypage/profile', [UserController::class, 'updateProfile']);
 
@@ -81,14 +82,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/checkout/cancel', [PaymentController::class, 'cancel'])->name('checkout.cancel');
 });
 
+//=======================  pro test ===========================
 
-//以下viewテスト用
-//Route::get('/update', [TestController::class, 'update']);
-//Route::get('/register', [TestController::class, 'register']);
-//Route::get('header', [TestController::class, 'header']);
-//Route::get('/header', [TestController::class, 'header']);
-
-
-/*Route::get('/', function () {
-    return view('welcome');
-});*/
+Route::get('/chat/{item_id}', [UserController::class, 'chat'])->name('chat');
+Route::post('/post', [UserController::class, 'post'])->name('post');

@@ -8,12 +8,13 @@
 .mypage-form_edit_profile_button {
     width: 20%;
     height: 6vh;
-    border: solid, 2px, #000;
+    border: solid, 2px, red;
     border-radius: 5px;
     background-color: #fff;
     margin-top: 6vh;
     margin-right: 8%;
-    font-size: 18px;
+    font-size: 100%;
+    color:red;
 }
 
 .mypage-form_user_picture_wrapper {
@@ -29,9 +30,10 @@
 }
 .mypage-form_user_name {
     display: flex;
-    align-items: center;
+    justify-content: center;
     margin-left: 6%;
     font-size: 25px;
+    flex-direction: column;
 }
 
 .mypage-form_mode_change_button_box {
@@ -50,6 +52,13 @@
     text-decoration:none;
 }
 .mypage-form_mode_purchased_item_button {
+    width: 15%;
+    margin-left: 5%;
+    font-size: 18px;
+    color:#000;
+    text-decoration:none;
+}
+.mypage-form_mode_chat_item_button {
     width: 15%;
     margin-left: 2%;
     font-size: 18px;

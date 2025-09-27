@@ -46,7 +46,25 @@ class User extends Authenticatable implements MustVerifyEmail
     /*protected $casts = [
         'email_verified_at' => 'datetime',
     ];*/
+//  ---------------- for pro test ------------------
+    public function chatByBuyer()
+    {
+        return $this->hasMany(Chat::class, 'buyer_id', 'id');
+    }
+    public function chatBySeller()
+    {
+        return $this->hasMany(Chat::class, 'seller_id', 'id');
+    }
+     public function chatToItemByBuyer()
+    {
+        return $this->belongsToMany(Item::class, 'chats', 'buyer_id', 'item_id');
+    }
+     public function chatToItemBySeller()
+    {
+        return $this->belongsToMany(Item::class, 'chats', 'seller_id', 'item_id');
+    }
 
+// --------------------------------------------------
     public function likeToItem()
     {
         return $this->belongsToMany(Item::class, 'likes', 'item_id', 'user_id');
@@ -57,17 +75,13 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->belongsToMany(Item::class, 'comments', 'item_id', 'user_id');
     }
 
-    /*public function itemsManyT0Many()
-    {
-        return $this->belongsToMany(Item::class, 'item_user', 'user_id', 'item_id');
-    }*/
     public function items()
     {
-        return $this->hasMany(Item::class, 'id', 'user_id');
+        return $this->hasMany(Item::class, 'user_id', 'id');
     }
     public function purchases()
     {
-        return $this->hasMany(Purchase::class, 'user_id');
+        return $this->hasMany(Purchase::class, 'user_id','id');
     }
 
     public function profile()

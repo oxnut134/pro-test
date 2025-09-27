@@ -39,10 +39,13 @@
 
                     .liked {
                         /* いいねしたときのスタイル（必要に応じて追加） */
+                        display: inline-block; /* ダミー*/
+
                     }
 
                     .not-liked {
                         /* いいねしていないときのスタイル（必要に応じて追加） */
+                        display: inline-block;  /* ダミー*/
                     }
                 </style>
 

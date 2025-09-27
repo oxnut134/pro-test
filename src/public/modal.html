@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>取引評価モーダル</title>
+    <style>
+        .modal {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0);
+            /*background-color: rgba(0, 0, 0, 0.5);*/
+        }
+
+        .modal-content {
+            background-color: #fefee6;
+            padding: 0px;
+            border-radius: 5px;
+            width: 400px;
+            height: 250px;
+            position: relative; /* 送信ボタンのために相対位置を設定 */
+            border:1px solid #000;
+        }
+
+        .star {
+            width: 18%; /* 星のサイズを大きくする */
+            height: auto; /* 星のサイズを大きくする */
+            cursor: pointer;
+        }
+
+        .submit-button {
+            background-color: red; /* 赤背景 */
+            color: white; /* 白文字 */
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            position: absolute; /* 絶対位置で配置 */
+            bottom: 10px; /* 下からの距離 */
+            right: 10px; /* 右からの距離 */
+        }
+    </style>
+</head>
+
+<!-- モーダル本体 -->
+<div id="transaction-modal" class="modal" style="display: none">
+    <div class="modal-content">
+        <div
+            style="
+                height: 23%;
+                font-size: 22px;
+                padding-left: 4%;
+                padding-top: 3%;
+                padding-bottom: 3%;
+                border-bottom: 1px solid #000;
+                vertical-align: center;
+            "
+        >
+            取引が完了しました。
+        </div>
+        <div style="padding-left: 4%; padding-top: 4%; font-size: 12px">
+            今回の取引相手はどうでしたか？
+        </div>
+        <div
+            style="
+                display: flex;
+                justify-content: space-around;
+                padding-top: 4%;
+                padding-bottom: 4%;
+                border-bottom: 1px solid #000;
+            "
+            id="star-rating"
+        >
+            <img
+                src="http://localhost/storage/star-gray-modal.png"
+                class="star"
+                data-value="1"
+            />
+            <img
+                src="http://localhost/storage/star-gray-modal.png"
+                class="star"
+                data-value="2"
+            />
+            <img
+                src="http://localhost/storage/star-gray-modal.png"
+                class="star"
+                data-value="3"
+            />
+            <img
+                src="http://localhost/storage/star-gray-modal.png"
+                class="star"
+                data-value="4"
+            />
+            <img
+                src="http://localhost/storage/star-gray-modal.png"
+                class="star"
+                data-value="5"
+            />
+        </div>
+        <button type="button" class="submit-button">送信する</button>
+    </div>
+</div>
+</html>
